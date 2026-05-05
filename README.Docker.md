@@ -145,7 +145,7 @@ depth = data["depth"]  # shape: (S, H, W, 1)
     -v /path/to/output:/output \
     vggt-depth --input /input/video.mp4 --output /output
   ```
-* **Memory**: processing 100 frames requires ~21 GB GPU memory (H100 benchmark).
+* **Memory**: processing 100 frames with VGGT-1B requires ~21 GB GPU memory (H100 benchmark).
   Use `--max_frames` and/or `--fps` to reduce frame count for GPUs with less VRAM.
 * VGGT processes **all frames jointly** (it's a multi-view transformer), so
   splitting a long video into shorter segments with `--max_frames` may give

@@ -155,7 +155,7 @@ def run_inference(model, image_paths: list, device: str) -> dict:
     )
 
     images = load_and_preprocess_images(image_paths).to(device)
-    print(f"Running inference on {len(image_paths)} frames (dtype={dtype}) …")
+    print(f"Running inference on {len(image_paths)} frames (dtype={dtype}) ...")
 
     with torch.no_grad():
         with torch.cuda.amp.autocast(dtype=dtype, enabled=(device == "cuda")):
@@ -301,6 +301,7 @@ def main():
     print("\nDone. Output files:")
     for f in sorted(os.listdir(args.output)):
         print(f"  {os.path.join(args.output, f)}")
+
 
 
 if __name__ == "__main__":
