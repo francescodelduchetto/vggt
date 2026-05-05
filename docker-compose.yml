@@ -1,0 +1,26 @@
+services:
+  vggt-depth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vggt-depth:latest
+
+    # ── NVIDIA GPU access ─────────────────────────────────────────────────────
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # ── Volume mounts ─────────────────────────────────────────────────────────
+    # Mount your input (video or image folder) at /input and collect output from /output.
+    # Edit the left-hand side of each colon to match your host paths.
+    volumes:
+      - ./input:/input:ro      # read-only input
+      - ./output:/output       # writable output
+
+    # ── Default command ───────────────────────────────────────────────────────
+    # Override with `docker compose run vggt-depth --input /input/myvideo.mp4`
+    command: ["--input", "/input", "--output", "/output"]
